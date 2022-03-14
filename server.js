@@ -17,14 +17,17 @@ const swaggerOptions = {
             description: "rest api."
         },
     },
-    apis: ["./routes/lotto.js"]
+    apis: ["./routes/lotto.js"],
+    explorer: true
 }
 
 // app.use('/catchphrases', catchphrases)
 app.use('/lotto', lotto)
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+app.use('/', () => console.log("HI"));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log('Up and running 🚀 on ' + port));
